@@ -44,6 +44,14 @@ jobs:
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
           GITHUB_REPO: ${{ github.repository }}
 
+      - name: Check deploy settings
+        run: |
+          echo "role=[${{ vars.AWS_DEPLOY_ROLE_ARN }}] region=[${{ vars.AWS_REGION }}] bucket=[${{ vars.SITE_BUCKET }}]"
+          test -n "${{ vars.AWS_DEPLOY_ROLE_ARN }}" || { echo "::error::Repository variable AWS_DEPLOY_ROLE_ARN is missing (add it under Variables, not Secrets)"; exit 1; }
+          test -n "${{ vars.AWS_REGION }}" || { echo "::error::Repository variable AWS_REGION is missing"; exit 1; }
+          TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | python3 -c "import sys,json;print(json.load(sys.stdin)['value'])")
+          echo "$TOKEN" | python3 -c "import sys,json,base64;p=sys.stdin.read().split('.')[1];p+='='*(-len(p)%4);print('oidc sub =',json.loads(base64.urlsafe_b64decode(p))['sub'])" || true
+
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:

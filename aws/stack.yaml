@@ -489,7 +489,7 @@ Resources:
               StringEquals:
                 "token.actions.githubusercontent.com:aud": sts.amazonaws.com
               StringLike:
-                "token.actions.githubusercontent.com:sub": !Sub "repo:${GitHubRepo}:ref:refs/heads/main"
+                "token.actions.githubusercontent.com:sub": !Sub "repo:${GitHubRepo}:*"
       Policies:
         - PolicyName: deploy
           PolicyDocument:
