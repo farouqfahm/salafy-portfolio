@@ -301,11 +301,10 @@ Resources:
           FrameOptions:
             FrameOption: SAMEORIGIN
             Override: true
-        CustomHeadersConfig:
-          Items:
-            - Header: Content-Security-Policy
-              Override: true
-              Value: >-
+          # CSP must live here: CloudFront rejects it as a custom header.
+          ContentSecurityPolicy:
+            Override: true
+            ContentSecurityPolicy: >-
                 default-src 'self'; base-uri 'self'; object-src 'none';
                 frame-ancestors 'self';
                 script-src 'self' 'unsafe-inline' https://platform.twitter.com https://unpkg.com;
@@ -316,6 +315,41 @@ Resources:
                 frame-src https://platform.twitter.com https://syndication.twitter.com https://www.linkedin.com https://www.youtube-nocookie.com https://player.vimeo.com;
                 child-src https://platform.twitter.com https://www.youtube-nocookie.com https://player.vimeo.com;
                 media-src 'self' https:
+
+  # /admin only: Decap CMS compiles code at runtime, so it needs 'unsafe-eval'.
+  # Kept off the public site, which keeps the strict policy above.
+  AdminHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub "${AWS::StackName}-admin-headers"
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000
+            IncludeSubdomains: true
+            Preload: true
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          ReferrerPolicy:
+            ReferrerPolicy: strict-origin-when-cross-origin
+            Override: true
+          FrameOptions:
+            FrameOption: SAMEORIGIN
+            Override: true
+          ContentSecurityPolicy:
+            Override: true
+            ContentSecurityPolicy: >-
+              default-src 'self'; base-uri 'self'; object-src 'none';
+              frame-ancestors 'self';
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com;
+              style-src 'self' 'unsafe-inline' https://unpkg.com;
+              img-src 'self' data: blob: https:;
+              font-src 'self' data: https:;
+              connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://unpkg.com;
+              frame-src 'self' blob:;
+              worker-src 'self' blob:;
+              media-src 'self' blob: https:
 
   CachePolicyStaticRef:
     Type: AWS::CloudFront::CachePolicy
@@ -402,6 +436,16 @@ Resources:
             OriginRequestPolicyId: !Ref ApiOriginRequestPolicy
             AllowedMethods: [GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE]
             CachedMethods: [GET, HEAD]
+          - PathPattern: "/admin*"
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            Compress: true
+            # AWS managed CachingDisabled: admin config changes show at once
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            ResponseHeadersPolicyId: !Ref AdminHeadersPolicy
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt RewriteFunction.FunctionMetadata.FunctionARN
           - PathPattern: "/_next/static/*"
             TargetOriginId: s3-site
             ViewerProtocolPolicy: redirect-to-https
@@ -410,6 +454,11 @@ Resources:
             ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy
         CustomErrorResponses:
           - ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+            ErrorCachingMinTTL: 60
+          # S3 behind OAC answers 403 for a missing key: show the 404 page too.
+          - ErrorCode: 403
             ResponseCode: 404
             ResponsePagePath: /404.html
             ErrorCachingMinTTL: 60

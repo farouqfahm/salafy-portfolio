@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T05:51:05.496Z",
+  "generatedAt": "2026-11-04T13:49:02.485Z",
   "profile": {
     "name": "Umar Fahm",
     "alias": "Salafy",
@@ -201,7 +201,7 @@
       {
         "slug": "2026-01-provisional-patent",
         "country": "Nigeria",
-        "title": "Provisional patent filed: full-stack hyperlocal flood prediction engine",
+        "title": "Provisional patent filed: Full-Stack Climate Intelligence Operating System for Low-Resource and Data-Scarce Regions",
         "date": "2026-01-15",
         "location": "Nigeria",
         "lat": 8.5,
@@ -218,7 +218,7 @@
             "value": "Provisional"
           }
         ],
-        "body": "Filed a provisional patent for a full-stack, hyperlocal flood prediction engine designed for data-scarce regions, where gauges and historical records are thin or missing."
+        "body": "Filed a provisional patent for a full-stack climate intelligence operating system designed for low-resource and data-scarce regions, combining remote sensing ingestion, physics-aware ML, and workflow integration."
       },
       {
         "slug": "2025-12-unicef-climate-innovation",
@@ -710,9 +710,16 @@
         "kind": "Course certificate"
       },
       {
+        "slug": "cs197-harvard",
+        "country": "United States",
+        "title": "CS197: AI Research Experiences",
+        "org": "Harvard SEAS",
+        "kind": "Advanced training"
+      },
+      {
         "slug": "nasa-arset",
         "country": "United States",
-        "title": "ARSET Certification",
+        "title": "ARSET: Fundamentals of Remote Sensing",
         "org": "NASA Applied Remote Sensing Training (ARSET)",
         "kind": "Certification"
       }
@@ -725,23 +732,61 @@
         "org": "Al-Hikmah University, Ilorin",
         "kind": "Degree",
         "date": "2025",
-        "detail": "Best Graduating Student, Faculty of Computing, Engineering and Technology"
+        "detail": "Best Graduating Student, Faculty of Computing, Engineering and Technology",
+        "thesis": "A Systems of Systems Framework for Earth Observation-Based Early Warning: From Satellite Sensing to Mobile Alerts in Lagos, Nigeria.",
+        "supervisor": "Dr. Mustapha I.O."
+      },
+      {
+        "slug": "goldsmiths-oss",
+        "country": "United Kingdom, Global",
+        "title": "Supplemental Coursework in Computer Science & Robotics Specialization",
+        "org": "Goldsmiths, University of London & OSS University",
+        "kind": "Course",
+        "detail": "Advanced modules covering programming, computer architecture, networking, and algorithmic theory."
       }
     ],
     "experience": [
       {
         "slug": "climatrixai",
         "country": "Nigeria",
-        "role": "Founder & Chief AI Officer",
+        "role": "Chief AI Officer (CAIO)",
         "org": "ClimatrixAI",
+        "start": "Jan 2025",
         "end": "Present",
-        "location": "Nigeria · global",
+        "location": "Lagos, Nigeria",
         "url": "https://climatrixai.com",
         "highlights": [
-          "Leads physics-based, deterministic climate risk scoring from satellite data, with an agentic AI layer on top.",
-          "Built FloodSentinel (2026) and DrainSentinel, an Axelera AI Pioneer 10 project.",
-          "Took ClimatrixAI into UNICEF Venture Fund, Qualcomm Make in Africa, INSEAD AI Venture Lab and NVIDIA Inception.",
+          "Spearheaded the architecture of FloodSentinel, an embedded real-time flood prediction system empowering residents with critical response data.",
+          "Designed and developed physical IoT hardware prototypes, including Hydrosentinel 1.0 and DrainSentinel DS-01, to capture localized environmental telemetry.",
+          "Architected systems to support market entry into Saudi Arabia and Egypt, targeting enterprise real estate and government sectors.",
+          "Authored and filed a provisional patent combining remote sensing ingestion, physics-aware ML, and workflow integration for emerging economies.",
           "Trained 5 engineers in agentic AI (2026)."
+        ]
+      },
+      {
+        "slug": "insead-ai-venture-lab",
+        "country": "United States",
+        "role": "Fellow",
+        "org": "INSEAD AI Venture Lab",
+        "start": "Aug 2025",
+        "end": "Nov 2025",
+        "location": "San Francisco, USA (Remote)",
+        "highlights": [
+          "Advanced frontier applications of AI in climate intelligence, focusing on technical scalability and deep-tech venture creation.",
+          "Collaborated directly with industry leaders and faculty to refine data models and strategic partnerships."
+        ]
+      },
+      {
+        "slug": "uds-robotics-intern",
+        "country": "Nigeria",
+        "role": "Robotics Engineer Intern",
+        "org": "UDS",
+        "start": "Summer 2024",
+        "end": "Summer 2024",
+        "location": "Lagos, Nigeria",
+        "highlights": [
+          "Designed and built autonomous robotic systems using simulation tools for rapid prototyping and testing.",
+          "Engineered microcontroller programs, sensor integration and actuator control for physical hardware."
         ]
       }
     ],
@@ -756,6 +801,12 @@
         "logo": "/media/proof/d4d-hub.png"
       },
       {
+        "slug": "iaeng",
+        "country": "Global",
+        "org": "International Association of Engineers (IAENG)",
+        "role": "Member"
+      },
+      {
         "slug": "nvidia-inception",
         "country": "Global",
         "org": "NVIDIA Inception",
@@ -763,6 +814,17 @@
         "since": "2025",
         "url": "https://www.nvidia.com/en-us/startups/",
         "logo": "/media/proof/nvidia-inception.jpg"
+      }
+    ],
+    "profile": [
+      {
+        "slug": "research",
+        "title": "Research profile",
+        "title_ar": "النبذة البحثية",
+        "interest": "Open to Direct-to-PhD positions in Computer Engineering, researching embedded AI architectures and real-time processing frameworks for satellite-based climate monitoring.",
+        "interest_ar": "منفتح على القبول المباشر في الدكتوراه في هندسة الحاسوب، لبحث معماريات الذكاء الاصطناعي المُضمَّن وأطر المعالجة الآنية للرصد المناخي عبر الأقمار الصناعية.",
+        "body": "Highly motivated computer scientist and hardware-software architect operating at the intersection of AI/ML, edge computing, and remote sensing. Proven ability to lead technical development in the climate intelligence sector, specifically building scalable, data-driven telemetry solutions for data-scarce regions.",
+        "body_ar": "عالم حاسوب ومهندس عتاد-برمجيات شديد الحماس، يعمل عند تقاطع الذكاء الاصطناعي/تعلّم الآلة والحوسبة الطرفية والاستشعار عن بُعد. قدرة مثبتة على قيادة التطوير التقني في قطاع الذكاء المناخي، وتحديدًا بناء حلول قياس عن بُعد قابلة للتوسّع ومبنية على البيانات للمناطق شحيحة البيانات."
       }
     ],
     "projects": [
@@ -781,12 +843,12 @@
       {
         "slug": "drainsentinel",
         "country": "Nigeria",
-        "title": "DrainSentinel",
+        "title": "DrainSentinel DS-01",
         "date": "2026-11-01",
         "status": "In progress",
         "role": "Builder",
         "org": "ClimatrixAI",
-        "summary": "Edge-AI cameras that spot blocked drains and alert sanitation authorities before they flood. Axelera AI Pioneer 10 project.",
+        "summary": "IoT / edge-AI hardware prototype that spots blocked drains and alerts sanitation authorities before they flood. Axelera AI Pioneer 10 project.",
         "tags": [
           "Edge AI",
           "Computer Vision",
@@ -808,12 +870,27 @@
         "status": "Completed",
         "role": "Builder",
         "org": "ClimatrixAI",
-        "summary": "Hyperlocal flood prediction and early warning for data-scarce regions.",
+        "summary": "Embedded real-time flood prediction system that gives residents critical response data.",
         "tags": [
           "Flood",
           "Early Warning",
           "AI"
         ]
+      },
+      {
+        "slug": "hydrosentinel",
+        "country": "Nigeria",
+        "title": "Hydrosentinel 1.0",
+        "date": "2026-06-01",
+        "role": "Builder",
+        "org": "ClimatrixAI",
+        "summary": "Physical IoT prototype capturing localized environmental telemetry.",
+        "tags": [
+          "IoT",
+          "Hardware",
+          "Telemetry"
+        ],
+        "body": "Physical IoT hardware prototype built to capture localized environmental telemetry for flood-risk monitoring."
       },
       {
         "slug": "climatrixai",
@@ -928,21 +1005,194 @@
     ],
     "publications": [
       {
+        "slug": "nigsatgrid1",
+        "country": "Nigeria",
+        "title": "NigSatGrid1: AI-Enhanced Satellite Surveillance Framework for Nigeria's Power Infrastructure",
+        "date": "2026-02-01",
+        "type": "Manuscript",
+        "authors": "Umar Fahm"
+      },
+      {
         "slug": "patent",
         "country": "Nigeria",
-        "title": "Full-stack hyperlocal flood prediction engine for data-scarce regions",
+        "title": "Full-Stack Climate Intelligence Operating System for Low-Resource and Data-Scarce Regions",
         "date": "2026-01-15",
         "type": "Patent",
         "authors": "Umar Fahm"
       },
       {
-        "slug": "arb-flash-floods-grid",
+        "slug": "mirg-icair-2025",
         "country": "Nigeria",
-        "title": "Seasonal flash floods and their impact on Nigeria's national power grid",
-        "venue": "ARB research competition · Top 5",
-        "date": "2025-06-15",
+        "title": "A Satellite-Based Early Warning System for Flood Prediction in Lagos: An AI-Driven Digital Transformation Approach",
+        "venue": "MIRG-ICAIR 2025, University of Lagos (paper + poster)",
+        "date": "2025-11-04",
         "type": "Paper",
-        "authors": "Umar Fahm"
+        "authors": "Umar Fahm",
+        "status": "Accepted"
+      }
+    ],
+    "recognizers": [
+      {
+        "slug": "axelera",
+        "name": "Axelera AI",
+        "logo": "/media/proof/axelera-pioneer10.jpg",
+        "url": "https://www.axelera.ai/",
+        "order": 5,
+        "show": true
+      },
+      {
+        "slug": "cambridge",
+        "name": "University of Cambridge",
+        "logo": "/media/proof/cambridge.svg",
+        "url": "https://www.cam.ac.uk/",
+        "order": 2,
+        "show": true
+      },
+      {
+        "slug": "eu-d4d-hub",
+        "name": "EU D4D Hub",
+        "logo": "/media/proof/d4d-hub.png",
+        "url": "https://d4dhub.eu/",
+        "order": 8,
+        "show": true
+      },
+      {
+        "slug": "insead",
+        "name": "INSEAD",
+        "logo": "/media/proof/insead.svg",
+        "url": "https://www.insead.edu/",
+        "order": 3,
+        "show": true
+      },
+      {
+        "slug": "nigcomsat",
+        "name": "NIGCOMSAT",
+        "logo": "/media/proof/nigcomsat.png",
+        "url": "https://nigcomsat.gov.ng/",
+        "order": 7,
+        "show": true
+      },
+      {
+        "slug": "qualcomm",
+        "name": "Qualcomm",
+        "logo": "/media/proof/qualcomm.svg",
+        "url": "https://www.qualcomm.com/",
+        "order": 4,
+        "show": true
+      },
+      {
+        "slug": "satnav-africa",
+        "name": "SatNav Africa",
+        "logo": "/media/proof/satnav-africa.jpg",
+        "order": 6,
+        "show": true
+      },
+      {
+        "slug": "unicef",
+        "name": "UNICEF",
+        "logo": "/media/proof/unicef-cic.jpg",
+        "url": "https://www.unicef.org/innovation/venturefund",
+        "order": 1,
+        "show": true
+      }
+    ],
+    "showcase": [
+      {
+        "slug": "climatrixai",
+        "show": true,
+        "product": "FloodSentinel",
+        "url": "https://climatrixai.com",
+        "image": "/media/showcase/floodsentinel.webp",
+        "alt": "FloodSentinel dashboard: a 3D city map with flood risk score, rain, humidity and an AI assessment",
+        "motion": true,
+        "captions": [
+          {
+            "text": "Hyperlocal flood risk, street by street",
+            "text_ar": "مخاطر الفيضانات بدقة على مستوى كل شارع"
+          },
+          {
+            "text": "Physics-based risk score with an AI explanation",
+            "text_ar": "درجة مخاطر قائمة على الفيزياء مع شرح بالذكاء الاصطناعي"
+          },
+          {
+            "text": "Live monitoring, alerts and evidence packs",
+            "text_ar": "مراقبة مباشرة وتنبيهات وحزم أدلة"
+          }
+        ],
+        "hotspots": [
+          {
+            "x": 2.5,
+            "y": 29.5,
+            "label": "Risk score",
+            "label_ar": "درجة المخاطر"
+          },
+          {
+            "x": 2.5,
+            "y": 53,
+            "label": "AI assessment",
+            "label_ar": "تقييم الذكاء الاصطناعي"
+          },
+          {
+            "x": 50,
+            "y": 76,
+            "label": "Monitored site",
+            "label_ar": "موقع تحت المراقبة"
+          },
+          {
+            "x": 93,
+            "y": 16,
+            "label": "Live incidents",
+            "label_ar": "حوادث مباشرة"
+          }
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "slug": "ai-spatial",
+        "category": "AI & Spatial Tech",
+        "category_ar": "الذكاء الاصطناعي والتقنيات المكانية",
+        "order": 3,
+        "items": [
+          "Edge AI",
+          "Remote Sensing Ingestion",
+          "Physics-Aware Machine Learning"
+        ]
+      },
+      {
+        "slug": "dev-tools",
+        "category": "Development Tools",
+        "category_ar": "أدوات التطوير",
+        "order": 4,
+        "items": [
+          "VS Code",
+          "AI Studio",
+          "Autodesk 360"
+        ]
+      },
+      {
+        "slug": "hardware-iot",
+        "category": "Hardware & IoT",
+        "category_ar": "العتاد وإنترنت الأشياء",
+        "order": 2,
+        "items": [
+          "Microcontroller Programming",
+          "Sensor Integration",
+          "Embedded Systems"
+        ]
+      },
+      {
+        "slug": "languages-frameworks",
+        "category": "Languages & Frameworks",
+        "category_ar": "اللغات والأُطُر",
+        "order": 1,
+        "items": [
+          "React",
+          "TypeScript",
+          "Python",
+          "C",
+          "Java"
+        ]
       }
     ],
     "social": [
