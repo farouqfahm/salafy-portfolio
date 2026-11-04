@@ -1,0 +1,40 @@
+{
+  "name": "salafy-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "flags": "node scripts/copy-flags.mjs",
+    "predev": "npm run assets",
+    "prebuild": "npm run assets",
+    "postinstall": "npm run assets",
+    "dev": "next dev",
+    "build": "next build",
+    "build:aws": "node scripts/build-aws.mjs",
+    "start": "next start",
+    "lint": "next lint",
+    "build:chat-context": "node scripts/build-chat-context.mjs",
+    "assets": "node scripts/copy-flags.mjs && node scripts/build-map.mjs && node scripts/build-icons.mjs"
+  },
+  "dependencies": {
+    "country-flag-icons": "1.6.20",
+    "feed": "4.2.2",
+    "gray-matter": "4.0.3",
+    "next": "15.5.28",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.0",
+    "@types/node": "22.10.5",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "@types/topojson-client": "3.1.5",
+    "autoprefixer": "10.4.20",
+    "d3-geo": "3.1.1",
+    "postcss": "8.5.1",
+    "tailwindcss": "3.4.17",
+    "topojson-client": "3.1.0",
+    "typescript": "5.7.3",
+    "world-atlas": "2.0.2"
+  }
+}

@@ -1,0 +1,329 @@
+# Decap CMS config. Every entry saved here becomes a Markdown file in /content
+# and is committed to the Git repo, which redeploys the site.
+#
+# Login: GitHub OAuth. The build fills __GITHUB_REPO__ (owner/repo) and
+# __SITE_ORIGIN__ (the deployed site origin, which serves the /api/auth OAuth
+# handler). Run `npx decap-server` locally + open /admin/ to edit without login.
+backend:
+  name: github
+  repo: __GITHUB_REPO__
+  branch: main
+  base_url: __SITE_ORIGIN__
+  auth_endpoint: api/auth
+local_backend: true
+
+media_folder: "public/media"
+public_folder: "/media"
+
+collections:
+  - name: "updates"
+    label: "Updates (log)"
+    folder: "content/updates"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} · {{tag}}"
+    identifier_field: "tag"
+    fields:
+      - &country { label: "Country", name: "country", widget: "select", options: ["Global", "Africa", "European Union", "Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Canary Islands", "Cape Verde", "Caribbean Netherlands", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo - Brazzaville", "Congo - Kinshasa", "Cook Islands", "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard & McDonald Islands", "Honduras", "Hong Kong SAR China", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao SAR China", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "North Korea", "North Macedonia", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestinian Territories", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Pseudo-Accents", "Puerto Rico", "Qatar", "Réunion", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", "São Tomé & Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia & South Sandwich Islands", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St. Barthélemy", "St. Helena", "St. Kitts & Nevis", "St. Lucia", "St. Martin", "St. Pierre & Miquelon", "St. Vincent & Grenadines", "Sudan", "Suriname", "Svalbard & Jan Mayen", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad & Tobago", "Tristan da Cunha", "Tunisia", "Türkiye", "Turkmenistan", "Turks & Caicos Islands", "Tuvalu", "U.S. Outlying Islands", "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"], required: false, hint: "Where it was achieved. The flag shows automatically." }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Tag", name: "tag", widget: "select", options: ["LAUNCH", "BUILD", "PILOT", "AWARD", "GRANT", "TALK", "PRESS", "RESEARCH", "TEACH", "COURSE", "PRODUCT", "FIELD", "LOG"], default: "LOG" }
+      - { label: "Text", name: "body", widget: "text" }
+      - { label: "Text (Arabic)", name: "text_ar", widget: "text", required: false }
+      - &media
+        label: "Media"
+        name: "media"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Type", name: "type", widget: "select", options: ["image", "video", "youtube", "vimeo"], default: "image" }
+          - { label: "Image or video file (for image/video)", name: "src", widget: "file", required: false, hint: "For YouTube/Vimeo, type the video id instead." }
+          - { label: "Caption / alt text", name: "alt", widget: "string", required: false }
+          - { label: "Image is a logo (show whole image on a light tile)", name: "fit", widget: "select", options: ["cover", "contain"], default: "cover", required: false }
+      - &links
+        label: "Links"
+        name: "links"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "URL", name: "url", widget: "string" }
+
+  - name: "achievements"
+    label: "Achievements (timeline + map)"
+    folder: "content/achievements"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title (Arabic)", name: "title_ar", widget: "string", required: false, hint: "Optional Arabic title. Shown when the site is in Arabic." }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Given or run by", name: "org", widget: "string", required: false }
+      - { label: "Result", name: "level", widget: "string", required: false, hint: "Winner, Top 10, Cohort, Awardee…" }
+      - { label: "Show in hero 'Selected by' strip", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Short name for the strip", name: "brand", widget: "string", required: false, hint: "e.g. UNICEF" }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Latitude", name: "lat", widget: "number", value_type: "float", required: false, hint: "Search the city on latlong.net" }
+      - { label: "Longitude", name: "lng", widget: "number", value_type: "float", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Add Award or Recognition to list it under Awards. Add Program for programmes." }
+      - label: "Metrics"
+        name: "metrics"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+      - *media
+      - *links
+      - { label: "Story (one paragraph)", name: "body", widget: "text" }
+
+  - name: "blog"
+    label: "Stories (blog)"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title (Arabic)", name: "title_ar", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Summary", name: "summary", widget: "string" }
+      - { label: "Summary (Arabic)", name: "summary_ar", widget: "string", required: false }
+      - { label: "Cover image", name: "cover", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "LinkedIn post URL", name: "linkedin", widget: "string", required: false }
+      - { label: "X / Twitter post URL", name: "twitter", widget: "string", required: false }
+      - { label: "Story", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Experience & projects"
+    folder: "content/projects"
+    create: true
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title (Arabic)", name: "title_ar", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: "Role", name: "role", widget: "string", required: false }
+      - { label: "Organisation", name: "org", widget: "string", required: false }
+      - { label: "Status", name: "status", widget: "string", default: "In progress", hint: "In progress, Completed, or a [REPLACE] note." }
+      - { label: "Pin to the front", name: "pinned", widget: "boolean", default: false, required: false }
+      - { label: "Summary", name: "summary", widget: "string" }
+      - { label: "Summary (Arabic)", name: "summary_ar", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - *media
+      - *links
+      - { label: "Details", name: "body", widget: "text", required: false }
+
+  - name: "experience"
+    label: "Work experience"
+    folder: "content/experience"
+    create: true
+    identifier_field: "role"
+    summary: "{{role}} · {{org}}"
+    fields:
+      - *country
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Organisation", name: "org", widget: "string" }
+      - { label: "Start year", name: "start", widget: "string" }
+      - { label: "End year", name: "end", widget: "string", hint: "Type Present for a current role" }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Website", name: "url", widget: "string", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+      - { label: "Highlights", name: "highlights", widget: "list", required: false }
+
+  - name: "awards"
+    label: "Awards & recognition"
+    folder: "content/awards"
+    create: true
+    fields:
+      - *country
+      - { label: "Award name", name: "title", widget: "string" }
+      - { label: "Award name (Arabic)", name: "title_ar", widget: "string", required: false }
+      - { label: "Given by", name: "org", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Level", name: "level", widget: "string", required: false, hint: "Winner, Finalist, Fellow, Top 30…" }
+      - { label: "Link", name: "url", widget: "string", required: false }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "One line on what it recognised", name: "body", widget: "text", required: false }
+
+  - name: "certifications"
+    label: "Certifications"
+    folder: "content/certifications"
+    create: true
+    fields:
+      - *country
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Issuer", name: "org", widget: "string" }
+      - { label: "Kind", name: "kind", widget: "select", options: ["Certification", "Course certificate", "Professional programme", "Advanced training", "License"], default: "Certification" }
+      - { label: "Year", name: "date", widget: "string", required: false }
+      - { label: "Credential ID", name: "credential_id", widget: "string", required: false }
+      - { label: "Verify link", name: "url", widget: "string", required: false }
+
+  - name: "publications"
+    label: "Publications"
+    folder: "content/publications"
+    create: true
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Journal, conference or outlet", name: "venue", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Type", name: "type", widget: "select", options: ["Paper", "Report", "Article", "Talk", "Patent", "Manuscript"] }
+      - { label: "Status", name: "status", widget: "string", required: false, hint: "e.g. Accepted, Under review, Published" }
+      - { label: "Authors", name: "authors", widget: "string" }
+      - { label: "Link", name: "url", widget: "string", required: false }
+      - { label: "Note", name: "note", widget: "string", required: false, hint: "A short note shown under the title, e.g. a date to confirm." }
+
+  - name: "memberships"
+    label: "Memberships"
+    folder: "content/memberships"
+    create: true
+    identifier_field: "org"
+    fields:
+      - *country
+      - { label: "Organisation", name: "org", widget: "string" }
+      - { label: "Role", name: "role", widget: "string", hint: "Member, Fellow, Advisor…" }
+      - { label: "Since (year)", name: "since", widget: "string", required: false }
+      - { label: "Link", name: "url", widget: "string", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    identifier_field: "name"
+    fields:
+      - *country
+      - { label: "Person's name", name: "name", widget: "string" }
+      - { label: "Their role", name: "role", widget: "string" }
+      - { label: "Their organisation", name: "org", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Their LinkedIn", name: "url", widget: "string", required: false }
+      - { label: "Quote (only words they agreed to share)", name: "body", widget: "text" }
+
+  - name: "social"
+    label: "Social posts (LinkedIn / X)"
+    folder: "content/social"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{platform}}"
+    identifier_field: "url"
+    summary: "{{date}} · {{platform}}"
+    fields:
+      - *country
+      - { label: "Network", name: "platform", widget: "select", options: ["linkedin", "x"] }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Post link", name: "url", widget: "string", hint: "Copy the post link from LinkedIn (… > Copy link to post) or X (Share > Copy link)" }
+      - { label: "Short text (fallback)", name: "text", widget: "string", required: false }
+
+  - name: "proof"
+    label: "Proof wall"
+    folder: "content/proof"
+    create: true
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Kind", name: "kind", widget: "select", options: ["Grant", "Program", "Exhibition", "Pilot", "Patent", "Press", "Partner"] }
+      - { label: "Organisation", name: "org", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "string", required: false }
+      - { label: "Link", name: "url", widget: "string", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+
+  - name: "education"
+    label: "Education"
+    folder: "content/education"
+    create: true
+    fields:
+      - *country
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Institution", name: "org", widget: "string" }
+      - { label: "Kind", name: "kind", widget: "select", options: ["Degree", "Course", "Diploma", "Exam"] }
+      - { label: "Year", name: "date", widget: "string", required: false }
+      - { label: "Honours / detail", name: "detail", widget: "string", required: false, hint: "e.g. Best Graduating Student" }
+      - { label: "Thesis title", name: "thesis", widget: "string", required: false }
+      - { label: "Supervisor", name: "supervisor", widget: "string", required: false }
+
+  - name: "gallery"
+    label: "Media gallery"
+    files:
+      - label: "Gallery"
+        name: "gallery"
+        file: "content/media/gallery.md"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Type", name: "type", widget: "select", options: ["image", "video", "youtube", "vimeo"], default: "image" }
+              - { label: "File or video id", name: "src", widget: "file", required: false }
+              - { label: "Caption", name: "alt", widget: "string", required: false }
+
+  - name: "profile"
+    label: "Research profile"
+    files:
+      - label: "Research profile"
+        name: "research"
+        file: "content/profile/research.md"
+        fields:
+          - { label: "Heading", name: "title", widget: "string", default: "Research profile" }
+          - { label: "Heading (Arabic)", name: "title_ar", widget: "string", required: false }
+          - { label: "Profile paragraph", name: "body", widget: "text" }
+          - { label: "Profile paragraph (Arabic)", name: "body_ar", widget: "text", required: false }
+          - { label: "Open-to / interest line", name: "interest", widget: "text", required: false }
+          - { label: "Open-to / interest line (Arabic)", name: "interest_ar", widget: "text", required: false }
+
+  - name: "skills"
+    label: "Skills"
+    folder: "content/skills"
+    create: true
+    identifier_field: "category"
+    summary: "{{category}}"
+    fields:
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Category (Arabic)", name: "category_ar", widget: "string", required: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1, required: false }
+      - { label: "Items", name: "items", widget: "list", field: { label: "Skill", name: "item", widget: "string" } }
+
+  - name: "recognizers"
+    label: "Recognized by (logos)"
+    folder: "content/recognizers"
+    create: true
+    identifier_field: "name"
+    summary: "{{name}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Logo", name: "logo", widget: "image" }
+      - { label: "Link", name: "url", widget: "string", required: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1, required: false }
+      - { label: "Show", name: "show", widget: "boolean", default: true }
+
+  - name: "showcase"
+    label: "ClimatrixAI product showcase (MacBook)"
+    files:
+      - label: "Showcase"
+        name: "climatrixai"
+        file: "content/showcase/climatrixai.md"
+        fields:
+          - { label: "Show it", name: "show", widget: "boolean", default: true }
+          - { label: "Product name", name: "product", widget: "string" }
+          - { label: "Link", name: "url", widget: "string", required: false }
+          - { label: "Screenshot (wide, e.g. 1800px)", name: "image", widget: "image" }
+          - { label: "Describe the screenshot (alt text)", name: "alt", widget: "string" }
+          - { label: "Video instead of screenshot (mp4/webm, optional)", name: "video", widget: "file", required: false }
+          - { label: "Animate (slow pan, pulses, captions)", name: "motion", widget: "boolean", default: true }
+          - label: "Rotating captions"
+            name: "captions"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "Arabic text", name: "text_ar", widget: "string", required: false }
+          - label: "Hotspots (pulsing dots on the screenshot)"
+            name: "hotspots"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Arabic label", name: "label_ar", widget: "string", required: false }
+              - { label: "Across, 0-100 (% from left of the image)", name: "x", widget: "number", value_type: "float", min: 0, max: 100 }
+              - { label: "Down, 0-100 (% from top of the image)", name: "y", widget: "number", value_type: "float", min: 0, max: 100 }

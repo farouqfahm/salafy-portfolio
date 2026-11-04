@@ -1,0 +1,492 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  salafy-portfolio: private S3 + CloudFront (OAC) static site, API Gateway HTTP
+  API -> Python Lambda backend (leads, Bedrock chat, geo, Decap GitHub OAuth
+  proxy), DynamoDB for leads + rate-limit counters, and an optional GitHub
+  Actions OIDC deploy role.
+
+Parameters:
+  BedrockModelId:
+    Type: String
+    Default: us.anthropic.claude-haiku-4-5-20251001-v1:0
+    Description: >-
+      Bedrock model id (inference profile) used by the chat route. Change to any
+      Claude model/inference profile you have enabled in BedrockRegion, e.g.
+      us.anthropic.claude-sonnet-4-5-20250929-v1:0. Must be reachable via the
+      Converse API in BedrockRegion.
+  BedrockRegion:
+    Type: String
+    Default: us-east-1
+    Description: Region whose Bedrock endpoint the Lambda calls (model access must be enabled there).
+  SiteOrigin:
+    Type: String
+    Default: ""
+    Description: >-
+      Public site origin, e.g. https://d123.cloudfront.net or https://umarfahm.com.
+      Used for OAuth redirect_uri and the Decap postMessage origin check. Leave
+      empty on first deploy, read the SiteUrl output, then redeploy with it set
+      (the deploy script does this automatically).
+  GitHubClientId:
+    Type: String
+    Default: ""
+    Description: GitHub OAuth App client id for Decap CMS login (empty disables /api/auth + /api/callback).
+  GitHubSecretParam:
+    Type: String
+    Default: /salafy-portfolio/github-client-secret
+    Description: Name of the SSM SecureString parameter holding the GitHub OAuth App client secret.
+  LeadWebhookUrl:
+    Type: String
+    Default: ""
+    Description: Optional webhook URL that accepted leads are POSTed to (empty = disabled).
+  BookingUrl:
+    Type: String
+    Default: https://cal.boardy.ai/farouqfahm
+    Description: Booking link the chat assistant hands serious visitors.
+  DomainName:
+    Type: String
+    Default: ""
+    Description: Optional custom domain (e.g. umarfahm.com). Empty = use the *.cloudfront.net domain.
+  AcmCertificateArn:
+    Type: String
+    Default: ""
+    Description: ACM certificate ARN in us-east-1 for DomainName (required when DomainName is set).
+  GitHubRepo:
+    Type: String
+    Default: ""
+    Description: owner/name of the GitHub repo allowed to deploy via OIDC (empty = no deploy role).
+  CreateOidcProvider:
+    Type: String
+    Default: "false"
+    AllowedValues: ["true", "false"]
+    Description: Create the GitHub OIDC provider in this account (set false if it already exists).
+
+Conditions:
+  HasDomain: !Not [!Equals [!Ref DomainName, ""]]
+  HasGitHubRepo: !Not [!Equals [!Ref GitHubRepo, ""]]
+  MakeOidcProvider: !And
+    - !Condition HasGitHubRepo
+    - !Equals [!Ref CreateOidcProvider, "true"]
+
+Resources:
+  # ---------------------------------------------------------------- storage ---
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  SiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SiteBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowCloudFrontRead
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub "${SiteBucket.Arn}/*"
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}"
+
+  LeadsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+      TimeToLiveSpecification:
+        AttributeName: expiresAt
+        Enabled: true
+      SSESpecification:
+        SSEEnabled: true
+
+  # ------------------------------------------------------------- lambda/api ---
+  ApiFunctionRole:
+    Type: AWS::IAM::Role
+    Metadata:
+      # bedrock:Converse / bedrock:ConverseStream are valid IAM actions; this
+      # cfn-lint version ships a stale Bedrock action catalog that flags them.
+      cfn-lint:
+        config:
+          ignore_checks:
+            - W3037
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      Policies:
+        - PolicyName: api-permissions
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: LeadsTableOnly
+                Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:Query
+                Resource: !GetAtt LeadsTable.Arn
+              - Sid: BedrockInvoke
+                Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                  - bedrock:Converse
+                  - bedrock:ConverseStream
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:bedrock:*::foundation-model/anthropic.*"
+                  - !Sub "arn:${AWS::Partition}:bedrock:*:${AWS::AccountId}:inference-profile/*.anthropic.*"
+              - Sid: ReadGitHubSecret
+                Effect: Allow
+                Action: ssm:GetParameter
+                Resource: !Sub "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${GitHubSecretParam}"
+              - Sid: DecryptSsmSecret
+                Effect: Allow
+                Action: kms:Decrypt
+                Resource: "*"
+                Condition:
+                  StringEquals:
+                    kms:ViaService: !Sub "ssm.${AWS::Region}.amazonaws.com"
+
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.12
+      Handler: index.handler
+      Architectures: [arm64]
+      MemorySize: 512
+      Timeout: 29
+      Role: !GetAtt ApiFunctionRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref LeadsTable
+          BEDROCK_MODEL_ID: !Ref BedrockModelId
+          BEDROCK_REGION: !Ref BedrockRegion
+          SITE_ORIGIN: !Ref SiteOrigin
+          GITHUB_CLIENT_ID: !Ref GitHubClientId
+          GITHUB_SECRET_PARAM: !Ref GitHubSecretParam
+          LEAD_WEBHOOK_URL: !Ref LeadWebhookUrl
+          BOOKING_URL: !Ref BookingUrl
+      Code:
+        # Placeholder bootstrap; real code is shipped via lambda:UpdateFunctionCode
+        # (deploy script / CI) from deploy/api.zip. Kept inline so the stack can
+        # be created before the first artifact upload.
+        ZipFile: |
+          def handler(event, context):
+              return {
+                  "statusCode": 503,
+                  "headers": {"content-type": "application/json"},
+                  "body": "{\"ok\":false,\"error\":\"API not yet deployed\"}",
+              }
+
+  ApiFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${ApiFunction}"
+      RetentionInDays: 30
+
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "${AWS::StackName}-api"
+      ProtocolType: HTTP
+
+  ApiIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ApiFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ApiRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: "ANY /api/{proxy+}"
+      Target: !Sub "integrations/${ApiIntegration}"
+
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: "$default"
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 20
+        ThrottlingRateLimit: 10
+
+  ApiInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*/*/api/{proxy+}"
+
+  # ----------------------------------------------------------- cloudfront ---
+  Oac:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub "${AWS::StackName}-oac"
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  RewriteFunction:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: !Sub "${AWS::StackName}-rewrite"
+      AutoPublish: true
+      FunctionConfig:
+        Comment: Append index.html to directory/extensionless URIs (Next export trailingSlash)
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          var uri = request.uri;
+          if (uri.endsWith('/')) {
+            request.uri = uri + 'index.html';
+          } else {
+            var last = uri.split('/').pop();
+            if (last.indexOf('.') === -1) {
+              request.uri = uri + '/index.html';
+            }
+          }
+          return request;
+        }
+
+  ResponseHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub "${AWS::StackName}-security-headers"
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000
+            IncludeSubdomains: true
+            Preload: true
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          ReferrerPolicy:
+            ReferrerPolicy: strict-origin-when-cross-origin
+            Override: true
+          FrameOptions:
+            FrameOption: SAMEORIGIN
+            Override: true
+        CustomHeadersConfig:
+          Items:
+            - Header: Content-Security-Policy
+              Override: true
+              Value: >-
+                default-src 'self'; base-uri 'self'; object-src 'none';
+                frame-ancestors 'self';
+                script-src 'self' 'unsafe-inline' https://platform.twitter.com https://unpkg.com;
+                style-src 'self' 'unsafe-inline';
+                img-src 'self' data: https:;
+                font-src 'self' data:;
+                connect-src 'self' https://api.github.com;
+                frame-src https://platform.twitter.com https://syndication.twitter.com https://www.linkedin.com https://www.youtube-nocookie.com https://player.vimeo.com;
+                child-src https://platform.twitter.com https://www.youtube-nocookie.com https://player.vimeo.com;
+                media-src 'self' https:
+
+  CachePolicyStaticRef:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub "${AWS::StackName}-static-immutable"
+        DefaultTTL: 31536000
+        MaxTTL: 31536000
+        MinTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingBrotli: true
+          EnableAcceptEncodingGzip: true
+          CookiesConfig:
+            CookieBehavior: none
+          HeadersConfig:
+            HeaderBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none
+
+  ApiOriginRequestPolicy:
+    Type: AWS::CloudFront::OriginRequestPolicy
+    Properties:
+      OriginRequestPolicyConfig:
+        Name: !Sub "${AWS::StackName}-api-origin"
+        CookiesConfig:
+          CookieBehavior: whitelist
+          Cookies:
+            - cms_oauth_state
+        HeadersConfig:
+          HeaderBehavior: whitelist
+          Headers:
+            - CloudFront-Viewer-Country
+            - Content-Type
+            - Origin
+            - Accept-Language
+        QueryStringsConfig:
+          QueryStringBehavior: all
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: !Sub "${AWS::StackName} site"
+        HttpVersion: http2and3
+        IPV6Enabled: true
+        DefaultRootObject: index.html
+        PriceClass: PriceClass_All
+        Aliases: !If [HasDomain, [!Ref DomainName], !Ref "AWS::NoValue"]
+        ViewerCertificate: !If
+          - HasDomain
+          - AcmCertificateArn: !Ref AcmCertificateArn
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2021
+          - CloudFrontDefaultCertificate: true
+        Origins:
+          - Id: s3-site
+            DomainName: !GetAtt SiteBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt Oac.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+          - Id: api
+            DomainName: !Sub "${HttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols: [TLSv1.2]
+        DefaultCacheBehavior:
+          TargetOriginId: s3-site
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          # AWS managed CachingOptimized
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt RewriteFunction.FunctionMetadata.FunctionARN
+        CacheBehaviors:
+          - PathPattern: "/api/*"
+            TargetOriginId: api
+            ViewerProtocolPolicy: redirect-to-https
+            Compress: true
+            # AWS managed CachingDisabled
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: !Ref ApiOriginRequestPolicy
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE]
+            CachedMethods: [GET, HEAD]
+          - PathPattern: "/_next/static/*"
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            Compress: true
+            CachePolicyId: !Ref CachePolicyStaticRef
+            ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+            ErrorCachingMinTTL: 60
+
+  # ------------------------------------------------------- github oidc ---
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: MakeOidcProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+      ThumbprintList:
+        - ffffffffffffffffffffffffffffffffffffffff
+
+  DeployRole:
+    Type: AWS::IAM::Role
+    Condition: HasGitHubRepo
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                "token.actions.githubusercontent.com:aud": sts.amazonaws.com
+              StringLike:
+                "token.actions.githubusercontent.com:sub": !Sub "repo:${GitHubRepo}:ref:refs/heads/main"
+      Policies:
+        - PolicyName: deploy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: SyncSite
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:DeleteObject
+                  - s3:ListBucket
+                  - s3:GetBucketLocation
+                Resource:
+                  - !GetAtt SiteBucket.Arn
+                  - !Sub "${SiteBucket.Arn}/*"
+              - Sid: Invalidate
+                Effect: Allow
+                Action: cloudfront:CreateInvalidation
+                Resource: !Sub "arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}"
+              - Sid: UpdateLambda
+                Effect: Allow
+                Action: lambda:UpdateFunctionCode
+                Resource: !GetAtt ApiFunction.Arn
+
+Outputs:
+  SiteUrl:
+    Description: Public site URL
+    Value: !If
+      - HasDomain
+      - !Sub "https://${DomainName}"
+      - !Sub "https://${Distribution.DomainName}"
+  BucketName:
+    Description: Private S3 bucket for the static site
+    Value: !Ref SiteBucket
+  DistributionId:
+    Description: CloudFront distribution id (for invalidations)
+    Value: !Ref Distribution
+  FunctionName:
+    Description: API Lambda function name (for lambda update-function-code)
+    Value: !Ref ApiFunction
+  DeployRoleArn:
+    Description: IAM role ARN for GitHub Actions OIDC deploys (empty if no GitHubRepo)
+    Value: !If [HasGitHubRepo, !GetAtt DeployRole.Arn, ""]
+  ApiCallbackUrl:
+    Description: GitHub OAuth App callback URL (set this in the OAuth App)
+    Value: !If
+      - HasDomain
+      - !Sub "https://${DomainName}/api/callback"
+      - !Sub "https://${Distribution.DomainName}/api/callback"

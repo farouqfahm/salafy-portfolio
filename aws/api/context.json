@@ -1,0 +1,1032 @@
+{
+  "generatedAt": "2026-11-04T05:51:05.496Z",
+  "profile": {
+    "name": "Umar Fahm",
+    "alias": "Salafy",
+    "role": "Founder & Chief AI Officer, ClimatrixAI",
+    "positioning": "Climate Intelligence for the Next Billion.",
+    "tagline": "Founder of ClimatrixAI: physics-based, deterministic climate risk scoring from satellite data, with an agentic AI layer on top.",
+    "email": "founders@climatrixai.com",
+    "website": "https://climatrixai.com",
+    "linkedin": "https://linkedin.com/in/farouqfahm/",
+    "twitter": "https://twitter.com/",
+    "booking": "https://cal.boardy.ai/farouqfahm"
+  },
+  "content": {
+    "achievements": [
+      {
+        "slug": "2026-10-ngic-london",
+        "country": "United Kingdom",
+        "title": "Award at the NEXTGEN Innovation Challenge Grand Finale, London",
+        "date": "2026-10-09",
+        "location": "ExCeL London, United Kingdom",
+        "lat": 51.508,
+        "lng": 0.029,
+        "org": "NBTI × UKALD",
+        "level": "Awardee",
+        "tags": [
+          "Award",
+          "Innovation"
+        ],
+        "featured": false,
+        "metrics": [
+          {
+            "label": "Innovators showcased at the finale",
+            "value": "298"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/ngic.png",
+            "alt": "NEXTGEN Innovation Challenge logo",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "NEXTGEN Innovation Challenge",
+            "url": "https://nextgeninnovation.ng/"
+          },
+          {
+            "label": "Punch: 298 innovators in London",
+            "url": "https://punchng.com/nbti-showcases-298-nigerian-innovators-to-global-investors-in-london/"
+          }
+        ],
+        "body": "The NEXTGEN Innovation Challenge is run by Nigeria's National Board for Technology Incubation (NBTI) with UK partner UKALD. After a boot camp in Abuja, finalists pitch to global investors at a grand finale in London. Umar received an award at the October 2026 finale, where 298 Nigerian innovators were showcased."
+      },
+      {
+        "slug": "2026-09-digital-impact-pioneer",
+        "country": "China",
+        "title": "Digital Impact Pioneer award",
+        "date": "2026-09-01",
+        "location": "China",
+        "lat": 39.9,
+        "lng": 116.4,
+        "org": "ITC × Youth OPC network",
+        "level": "Awardee",
+        "tags": [
+          "Award",
+          "Recognition"
+        ],
+        "body": "Named a Digital Impact Pioneer by the ITC and Youth OPC network in China."
+      },
+      {
+        "slug": "2026-08-accelicity-top50",
+        "country": "Global",
+        "title": "Top 50 global resilience solution, QBE AcceliCITY Resilience Challenge",
+        "date": "2026-08-01",
+        "location": "Global",
+        "lat": 42.36,
+        "lng": -71.06,
+        "org": "Leading Cities × QBE",
+        "level": "Top 50",
+        "tags": [
+          "Award",
+          "Resilience"
+        ],
+        "metrics": [
+          {
+            "label": "Global ranking",
+            "value": "Top 50"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/accelicity.jpg",
+            "alt": "QBE AcceliCITY Resilience Challenge"
+          }
+        ],
+        "links": [
+          {
+            "label": "AcceliCITY Resilience Challenge",
+            "url": "https://www.leadingcities.org/resiliencechallenge"
+          }
+        ],
+        "body": "The AcceliCITY Resilience Challenge is an annual global competition run by the nonprofit Leading Cities with QBE Insurance. It looks for solutions that help cities manage climate risk and build resilience. ClimatrixAI was ranked among the top 50 resilience solutions worldwide in the 2026 cycle."
+      },
+      {
+        "slug": "2026-04-naija-sdg-hackathon",
+        "country": "Nigeria",
+        "title": "1st place, Naija SDG Hackathon",
+        "date": "2026-04-15",
+        "location": "Lagos, Nigeria",
+        "lat": 6.52,
+        "lng": 3.38,
+        "org": "Naija SDG Hackathon",
+        "level": "Winner",
+        "tags": [
+          "Award",
+          "Hackathon"
+        ],
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "1st"
+          }
+        ],
+        "body": "Won first place at the Naija SDG Hackathon in Nigeria."
+      },
+      {
+        "slug": "2026-04-egypt-csr-summit",
+        "country": "Egypt",
+        "title": "Recognised at the CSR & Sustainability Summit, Egypt",
+        "date": "2026-04-01",
+        "location": "Cairo, Egypt",
+        "lat": 30.04,
+        "lng": 31.24,
+        "org": "CSR & Sustainability Summit",
+        "level": "Recognition",
+        "tags": [
+          "Award",
+          "Recognition"
+        ],
+        "body": "Recognised for ClimatrixAI's climate work at a CSR and sustainability summit in Egypt."
+      },
+      {
+        "slug": "2026-03-germany-entrepreneurship",
+        "country": "Germany",
+        "title": "Top 10, international student entrepreneurship competition, Germany",
+        "date": "2026-03-01",
+        "location": "Germany",
+        "lat": 51.16,
+        "lng": 10.45,
+        "org": "International student entrepreneurship competition",
+        "level": "Top 10",
+        "tags": [
+          "Award",
+          "Entrepreneurship"
+        ],
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "Top 10"
+          }
+        ],
+        "body": "Placed in the top 10 of an international student entrepreneurship competition in Germany."
+      },
+      {
+        "slug": "2026-02-eu-d4d-hub",
+        "country": "European Union",
+        "title": "Member, EU D4D Hub Private Sector Advisory Group",
+        "date": "2026-02-01",
+        "location": "Brussels, Belgium",
+        "lat": 50.85,
+        "lng": 4.35,
+        "org": "EU Digital for Development (D4D) Hub",
+        "level": "Advisory group member",
+        "tags": [
+          "Recognition",
+          "Policy"
+        ],
+        "featured": true,
+        "brand": "EU D4D Hub",
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/d4d-hub.png",
+            "alt": "EU Digital for Development Hub",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "D4D Hub",
+            "url": "https://d4dhub.eu/"
+          }
+        ],
+        "body": "The Digital for Development (D4D) Hub is a Team Europe initiative, launched by the European Commission in 2020, that coordinates EU digital cooperation with partner countries. Umar was selected to its Private Sector Advisory Group, giving input on how private innovators can shape digital development across Africa."
+      },
+      {
+        "slug": "2026-01-provisional-patent",
+        "country": "Nigeria",
+        "title": "Provisional patent filed: full-stack hyperlocal flood prediction engine",
+        "date": "2026-01-15",
+        "location": "Nigeria",
+        "lat": 8.5,
+        "lng": 4.55,
+        "org": "ClimatrixAI",
+        "level": "Patent pending",
+        "tags": [
+          "Patent",
+          "Flood"
+        ],
+        "metrics": [
+          {
+            "label": "Status",
+            "value": "Provisional"
+          }
+        ],
+        "body": "Filed a provisional patent for a full-stack, hyperlocal flood prediction engine designed for data-scarce regions, where gauges and historical records are thin or missing."
+      },
+      {
+        "slug": "2025-12-unicef-climate-innovation",
+        "country": "Global",
+        "title": "Top 5 climate tech venture, UNICEF Climate Innovation Challenge",
+        "date": "2025-12-01",
+        "location": "Global · UNICEF Office of Innovation",
+        "lat": 40.75,
+        "lng": -73.97,
+        "org": "UNICEF Venture Fund",
+        "level": "Top 5",
+        "tags": [
+          "Award",
+          "Climate"
+        ],
+        "featured": true,
+        "brand": "UNICEF",
+        "metrics": [
+          {
+            "label": "Applicants",
+            "value": "1,200+"
+          },
+          {
+            "label": "Ventures selected",
+            "value": "5"
+          },
+          {
+            "label": "From Africa",
+            "value": "Only one"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/unicef-cic.jpg",
+            "alt": "UNICEF Climate Innovation Challenge announcement"
+          }
+        ],
+        "links": [
+          {
+            "label": "UNICEF announcement",
+            "url": "https://www.unicef.org/innovation/top-5-promising-climate-tech-start-ups-emerging-economies-revealed"
+          }
+        ],
+        "body": "UNICEF's Office of Innovation ran the Climate Innovation Challenge with the India Health Fund and the Cambridge Institute for Sustainability Leadership. From more than 1,200 startups across emerging markets, five ventures were selected for mentorship and investment-readiness support through the UNICEF Venture Fund. ClimatrixAI was the only African venture chosen. UNICEF describes it as combining satellite imagery, IoT sensors and AI for hyperlocal predictions of floods, heatwaves and other hazards."
+      },
+      {
+        "slug": "2025-11-mirg-icair",
+        "country": "Nigeria",
+        "title": "Paper and poster accepted at MIRG-ICAIR 2025",
+        "date": "2025-11-04",
+        "location": "University of Lagos, Nigeria",
+        "lat": 6.52,
+        "lng": 3.4,
+        "org": "Machine Intelligence Research Group (MIRG)",
+        "level": "Accepted paper",
+        "tags": [
+          "Research"
+        ],
+        "metrics": [
+          {
+            "label": "Conference participants",
+            "value": "900+"
+          },
+          {
+            "label": "Countries",
+            "value": "20+"
+          }
+        ],
+        "body": "Research paper and poster accepted (September 2025) at the 5th International Conference on Artificial Intelligence and Robotics (MIRG-ICAIR), hosted by the Machine Intelligence Research Group at the University of Lagos, 4-6 November 2025."
+      },
+      {
+        "slug": "2025-09-climatraces-nyc-climate-week",
+        "country": "United States",
+        "title": "climaTRACES Lab special prize, University of Cambridge (Climate Week NYC)",
+        "date": "2025-09-22",
+        "location": "New York City (virtual)",
+        "lat": 40.71,
+        "lng": -74.01,
+        "org": "climaTRACES Lab, University of Cambridge",
+        "level": "Special prize",
+        "tags": [
+          "Award",
+          "Climate"
+        ],
+        "featured": true,
+        "brand": "University of Cambridge",
+        "metrics": [
+          {
+            "label": "Global winners",
+            "value": "1 of 7"
+          },
+          {
+            "label": "Participants",
+            "value": "500+"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/cambridge.svg",
+            "alt": "University of Cambridge",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "climaTRACES Lab",
+            "url": "https://www.crassh.cam.ac.uk/research/research-labs/cambridge-climatraces/"
+          }
+        ],
+        "body": "Pitched ClimatrixAI during Climate Week NYC and was awarded the climaTRACES Lab special prize. climaTRACES is an interdisciplinary climate research lab at the University of Cambridge. Umar was one of seven global winners from more than 500 participants, pitching remotely from Nigeria."
+      },
+      {
+        "slug": "2025-09-best-graduating-student",
+        "country": "Nigeria",
+        "title": "First Class & Best Graduating Student, Faculty of Computing, Engineering and Technology",
+        "date": "2025-09-15",
+        "location": "Al-Hikmah University, Ilorin, Nigeria",
+        "lat": 8.48,
+        "lng": 4.62,
+        "org": "Al-Hikmah University",
+        "level": "Best Graduating Student",
+        "tags": [
+          "Award",
+          "Academic"
+        ],
+        "metrics": [
+          {
+            "label": "Class of degree",
+            "value": "First Class"
+          },
+          {
+            "label": "Faculty rank",
+            "value": "#1"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/al-hikmah.jpg",
+            "alt": "Al-Hikmah University, Ilorin"
+          }
+        ],
+        "body": "Graduated with a First Class BSc in Computer Science and was named Best Graduating Student of the Faculty of Computing, Engineering and Technology at Al-Hikmah University, Ilorin, while building ClimatrixAI."
+      },
+      {
+        "slug": "2025-08-deep-learning-indaba",
+        "country": "Rwanda",
+        "title": "Selected for Deep Learning Indaba 2025 and the AfriClimateAI workshop",
+        "date": "2025-08-17",
+        "location": "Kigali, Rwanda",
+        "lat": -1.95,
+        "lng": 30.06,
+        "org": "Deep Learning Indaba",
+        "level": "Selected",
+        "tags": [
+          "Program",
+          "Research"
+        ],
+        "metrics": [
+          {
+            "label": "Roles",
+            "value": "Showcase · panel · workshop"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/indaba.svg",
+            "alt": "Deep Learning Indaba",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "Deep Learning Indaba 2025",
+            "url": "https://deeplearningindaba.com/2025/"
+          }
+        ],
+        "body": "The Deep Learning Indaba is Africa's largest gathering of the machine learning community, held in 2025 at the University of Rwanda in Kigali. Umar was selected to showcase ClimatrixAI, speak on a panel and present his work in the AfriClimateAI workshop series."
+      },
+      {
+        "slug": "2025-08-insead-ai-venture-lab",
+        "country": "Global",
+        "title": "Inaugural cohort, INSEAD AI Venture Lab",
+        "date": "2025-08-15",
+        "location": "Global (virtual)",
+        "lat": 48.4,
+        "lng": 2.7,
+        "org": "INSEAD",
+        "level": "Inaugural cohort",
+        "tags": [
+          "Program",
+          "Venture"
+        ],
+        "featured": true,
+        "brand": "INSEAD",
+        "metrics": [
+          {
+            "label": "Cohort",
+            "value": "Inaugural"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/insead.svg",
+            "alt": "INSEAD",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "INSEAD AI Venture Lab",
+            "url": "https://www.insead.edu/"
+          }
+        ],
+        "body": "Accepted into the first cohort of the INSEAD AI Venture Lab, INSEAD's curated global programme for early-stage AI founders."
+      },
+      {
+        "slug": "2025-07-gnss-early-warning",
+        "country": "Africa",
+        "title": "Winner, GNSS Data for Early Warning Hackathon (pan-African)",
+        "date": "2025-07-15",
+        "location": "Pan-African",
+        "org": "SatNav Africa",
+        "level": "Winner",
+        "tags": [
+          "Award",
+          "Hackathon",
+          "Early Warning"
+        ],
+        "featured": true,
+        "brand": "SatNav Africa",
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "1st"
+          },
+          {
+            "label": "Scope",
+            "value": "Pan-African"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/satnav-africa.jpg",
+            "alt": "SatNav Africa",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "SatNav Africa",
+            "url": "https://conference.satnav-jpo.com/"
+          }
+        ],
+        "body": "Won the GNSS Data for Early Warning hackathon, a pan-African competition organised by the SatNav Africa Joint Programme Office. Teams built early warning tools using satellite navigation (GNSS) data."
+      },
+      {
+        "slug": "2025-07-nextgen-blockchain",
+        "country": "Africa",
+        "title": "1st runner-up, NextGen blockchain hackathon for West African undergraduates",
+        "date": "2025-07-10",
+        "location": "West Africa",
+        "org": "NextGen",
+        "level": "1st runner-up",
+        "tags": [
+          "Award",
+          "Hackathon",
+          "Blockchain"
+        ],
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "2nd"
+          }
+        ],
+        "body": "Finished as first runner-up at the NextGen blockchain hackathon for undergraduates across West Africa."
+      },
+      {
+        "slug": "2025-07-axelera-pioneer-10",
+        "country": "Netherlands",
+        "title": "Axelera AI Pioneer 10: one of 10 projects selected worldwide",
+        "date": "2025-07-01",
+        "location": "Eindhoven, Netherlands (global)",
+        "lat": 51.44,
+        "lng": 5.47,
+        "org": "Axelera AI",
+        "level": "Pioneer 10",
+        "tags": [
+          "Award",
+          "Edge AI",
+          "Hardware"
+        ],
+        "featured": true,
+        "brand": "Axelera AI",
+        "metrics": [
+          {
+            "label": "Projects selected",
+            "value": "10"
+          },
+          {
+            "label": "From Africa",
+            "value": "Only one"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/axelera-pioneer10.jpg",
+            "alt": "Axelera AI Pioneer 10 announcement"
+          }
+        ],
+        "links": [
+          {
+            "label": "Pioneer 10 announcement",
+            "url": "https://community.axelera.ai/project-challenge-27/the-pioneer-10-have-been-selected-254"
+          }
+        ],
+        "body": "Axelera AI's Pioneer 10 Project Challenge asked developers to build computer-vision systems on Axelera's Metis edge-AI hardware that trigger real-world action. Umar's DrainSentinel, which spots blocked drains and alerts sanitation authorities before they cause flooding, was one of 10 projects selected and received a hardware kit for the build. It was the only selected project from Africa."
+      },
+      {
+        "slug": "2025-06-arb-research",
+        "country": "Nigeria",
+        "title": "Top 5, ARB research competition",
+        "date": "2025-06-15",
+        "location": "Nigeria",
+        "org": "ARB",
+        "level": "Top 5",
+        "tags": [
+          "Award",
+          "Research"
+        ],
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "Top 5"
+          }
+        ],
+        "body": "Placed top 5 with a research paper on how seasonal flash floods affect Nigeria's national power grid, linking flood hazard to energy infrastructure risk."
+      },
+      {
+        "slug": "2025-05-nigcomsat-gitex",
+        "country": "Nigeria",
+        "title": "NIGCOMSAT Space Accelerator 2025 and sponsored exhibitor at GITEX Nigeria",
+        "date": "2025-05-15",
+        "location": "Abuja, Nigeria",
+        "lat": 9.06,
+        "lng": 7.49,
+        "org": "NIGCOMSAT",
+        "level": "Accelerator cohort",
+        "tags": [
+          "Program",
+          "Space"
+        ],
+        "featured": true,
+        "brand": "NIGCOMSAT",
+        "metrics": [
+          {
+            "label": "GITEX Nigeria",
+            "value": "Inaugural edition"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/nigcomsat.png",
+            "alt": "NIGCOMSAT",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "NIGCOMSAT",
+            "url": "https://nigcomsat.gov.ng/"
+          }
+        ],
+        "body": "Selected for the Space Accelerator programme of NIGCOMSAT, Nigeria's state satellite operator, and sponsored to exhibit ClimatrixAI at the inaugural GITEX Nigeria (Abuja, 1-4 September 2025)."
+      },
+      {
+        "slug": "2025-04-qualcomm-make-in-africa",
+        "country": "Africa",
+        "title": "Top 10 deep-tech startup, Qualcomm Make in Africa 2025",
+        "date": "2025-04-15",
+        "location": "Pan-African",
+        "org": "Qualcomm",
+        "level": "Top 10",
+        "tags": [
+          "Award",
+          "Program",
+          "Deep Tech"
+        ],
+        "featured": true,
+        "brand": "Qualcomm",
+        "metrics": [
+          {
+            "label": "Applications",
+            "value": "~435"
+          },
+          {
+            "label": "Countries",
+            "value": "19"
+          },
+          {
+            "label": "Startups selected",
+            "value": "10"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/qualcomm.svg",
+            "alt": "Qualcomm",
+            "fit": "contain"
+          }
+        ],
+        "links": [
+          {
+            "label": "Connecting Africa report",
+            "url": "https://www.connectingafrica.com/skills-and-training/qualcomm-shortlists-startups-for-make-in-africa-2025-program"
+          }
+        ],
+        "body": "Qualcomm Make in Africa is an equity-free mentorship programme for African deep-tech startups working on edge AI, IoT and 5G. ClimatrixAI was one of 10 startups selected for the 2025 cohort from about 435 applications across 19 countries, for AI-driven hyperlocal flood risk prediction and monitoring."
+      },
+      {
+        "slug": "2025-01-rain-hackathon",
+        "country": "Nigeria",
+        "title": "Top 10, RAIN National Hackathon 2025",
+        "date": "2025-01-20",
+        "location": "Nigeria",
+        "lat": 9.08,
+        "lng": 7.4,
+        "org": "Robotics & Artificial Intelligence Nigeria (RAIN)",
+        "level": "Top 10",
+        "tags": [
+          "Award",
+          "Hackathon"
+        ],
+        "metrics": [
+          {
+            "label": "Placement",
+            "value": "Top 10"
+          },
+          {
+            "label": "Al-Hikmah University",
+            "value": "First undergrad at a national tech contest"
+          }
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "/media/proof/rain.jpg",
+            "alt": "Robotics and Artificial Intelligence Nigeria"
+          }
+        ],
+        "links": [
+          {
+            "label": "RAIN",
+            "url": "https://rainigeria.com/"
+          }
+        ],
+        "body": "Reached the top 10 at the national hackathon run by Robotics and Artificial Intelligence Nigeria (RAIN). Umar was the first undergraduate to represent Al-Hikmah University at a national-level tech competition."
+      }
+    ],
+    "certifications": [
+      {
+        "slug": "aibo-china",
+        "country": "China",
+        "title": "AIBO course",
+        "kind": "Course certificate",
+        "date": "2026"
+      },
+      {
+        "slug": "mckinsey-forward",
+        "country": "Global",
+        "title": "Forward Program",
+        "org": "McKinsey.org",
+        "kind": "Professional programme",
+        "date": "2025"
+      },
+      {
+        "slug": "cambridge-carbon-esg",
+        "country": "United Kingdom",
+        "title": "Carbon & ESG Analysis",
+        "org": "University of Cambridge",
+        "kind": "Course certificate"
+      },
+      {
+        "slug": "nasa-arset",
+        "country": "United States",
+        "title": "ARSET Certification",
+        "org": "NASA Applied Remote Sensing Training (ARSET)",
+        "kind": "Certification"
+      }
+    ],
+    "education": [
+      {
+        "slug": "bsc-cs",
+        "country": "Nigeria",
+        "title": "BSc Computer Science · First Class",
+        "org": "Al-Hikmah University, Ilorin",
+        "kind": "Degree",
+        "date": "2025",
+        "detail": "Best Graduating Student, Faculty of Computing, Engineering and Technology"
+      }
+    ],
+    "experience": [
+      {
+        "slug": "climatrixai",
+        "country": "Nigeria",
+        "role": "Founder & Chief AI Officer",
+        "org": "ClimatrixAI",
+        "end": "Present",
+        "location": "Nigeria · global",
+        "url": "https://climatrixai.com",
+        "highlights": [
+          "Leads physics-based, deterministic climate risk scoring from satellite data, with an agentic AI layer on top.",
+          "Built FloodSentinel (2026) and DrainSentinel, an Axelera AI Pioneer 10 project.",
+          "Took ClimatrixAI into UNICEF Venture Fund, Qualcomm Make in Africa, INSEAD AI Venture Lab and NVIDIA Inception.",
+          "Trained 5 engineers in agentic AI (2026)."
+        ]
+      }
+    ],
+    "memberships": [
+      {
+        "slug": "eu-d4d-hub",
+        "country": "European Union",
+        "org": "EU D4D Hub",
+        "role": "Private Sector Advisory Group",
+        "since": "2026",
+        "url": "https://d4dhub.eu/",
+        "logo": "/media/proof/d4d-hub.png"
+      },
+      {
+        "slug": "nvidia-inception",
+        "country": "Global",
+        "org": "NVIDIA Inception",
+        "role": "Member startup (ClimatrixAI)",
+        "since": "2025",
+        "url": "https://www.nvidia.com/en-us/startups/",
+        "logo": "/media/proof/nvidia-inception.jpg"
+      }
+    ],
+    "projects": [
+      {
+        "slug": "ardis",
+        "country": "Nigeria",
+        "title": "Ardis",
+        "date": "2026-11-01",
+        "status": "In progress",
+        "role": "Builder",
+        "org": "ClimatrixAI",
+        "tags": [
+          "In development"
+        ]
+      },
+      {
+        "slug": "drainsentinel",
+        "country": "Nigeria",
+        "title": "DrainSentinel",
+        "date": "2026-11-01",
+        "status": "In progress",
+        "role": "Builder",
+        "org": "ClimatrixAI",
+        "summary": "Edge-AI cameras that spot blocked drains and alert sanitation authorities before they flood. Axelera AI Pioneer 10 project.",
+        "tags": [
+          "Edge AI",
+          "Computer Vision",
+          "Flood"
+        ],
+        "links": [
+          {
+            "label": "Pioneer 10",
+            "url": "https://community.axelera.ai/project-challenge-27/the-pioneer-10-have-been-selected-254"
+          }
+        ],
+        "body": "Built on Axelera's Metis edge-AI hardware. Deployment pending."
+      },
+      {
+        "slug": "floodsentinel",
+        "country": "Nigeria",
+        "title": "FloodSentinel",
+        "date": "2026-07-01",
+        "status": "Completed",
+        "role": "Builder",
+        "org": "ClimatrixAI",
+        "summary": "Hyperlocal flood prediction and early warning for data-scarce regions.",
+        "tags": [
+          "Flood",
+          "Early Warning",
+          "AI"
+        ]
+      },
+      {
+        "slug": "climatrixai",
+        "country": "Nigeria",
+        "title": "ClimatrixAI",
+        "date": "2024-01-01",
+        "status": "In progress",
+        "pinned": true,
+        "role": "Founder & Chief AI Officer",
+        "org": "ClimatrixAI",
+        "summary": "Physics-based, deterministic climate risk scoring from satellite data, with an agentic AI layer on top.",
+        "tags": [
+          "Climate Risk",
+          "Satellite",
+          "Agentic AI"
+        ],
+        "links": [
+          {
+            "label": "climatrixai.com",
+            "url": "https://climatrixai.com"
+          }
+        ]
+      }
+    ],
+    "proof": [
+      {
+        "slug": "ngic",
+        "country": "United Kingdom",
+        "title": "Grand Finale awardee, London",
+        "kind": "Program",
+        "org": "NEXTGEN Innovation Challenge",
+        "date": "2026-10",
+        "url": "https://nextgeninnovation.ng/",
+        "logo": "/media/proof/ngic.png"
+      },
+      {
+        "slug": "patent",
+        "country": "Nigeria",
+        "title": "Provisional patent: hyperlocal flood prediction engine",
+        "kind": "Patent",
+        "org": "ClimatrixAI",
+        "date": "2026-01"
+      },
+      {
+        "slug": "unicef-venture-fund",
+        "country": "Global",
+        "title": "UNICEF Climate Innovation Challenge · Top 5",
+        "kind": "Program",
+        "org": "UNICEF Venture Fund",
+        "date": "2025-12",
+        "url": "https://www.unicef.org/innovation/top-5-promising-climate-tech-start-ups-emerging-economies-revealed",
+        "logo": "/media/proof/unicef-cic.jpg"
+      },
+      {
+        "slug": "gitex-nigeria",
+        "country": "Nigeria",
+        "title": "Sponsored exhibitor, GITEX Nigeria 2025",
+        "kind": "Exhibition",
+        "org": "GITEX Nigeria",
+        "date": "2025-09"
+      },
+      {
+        "slug": "indaba",
+        "country": "Rwanda",
+        "title": "Deep Learning Indaba 2025",
+        "kind": "Program",
+        "org": "Deep Learning Indaba",
+        "date": "2025-08",
+        "url": "https://deeplearningindaba.com/2025/",
+        "logo": "/media/proof/indaba.svg"
+      },
+      {
+        "slug": "insead",
+        "country": "Global",
+        "title": "AI Venture Lab, inaugural cohort",
+        "kind": "Program",
+        "org": "INSEAD",
+        "date": "2025-08",
+        "url": "https://www.insead.edu/",
+        "logo": "/media/proof/insead.svg"
+      },
+      {
+        "slug": "axelera",
+        "country": "Netherlands",
+        "title": "Pioneer 10 · DrainSentinel",
+        "kind": "Program",
+        "org": "Axelera AI",
+        "date": "2025-07",
+        "url": "https://community.axelera.ai/project-challenge-27/the-pioneer-10-have-been-selected-254",
+        "logo": "/media/proof/axelera-pioneer10.jpg"
+      },
+      {
+        "slug": "nigcomsat",
+        "country": "Nigeria",
+        "title": "Space Accelerator 2025",
+        "kind": "Program",
+        "org": "NIGCOMSAT",
+        "date": "2025-05",
+        "url": "https://nigcomsat.gov.ng/",
+        "logo": "/media/proof/nigcomsat.png"
+      },
+      {
+        "slug": "qualcomm-qmia",
+        "country": "Africa",
+        "title": "Qualcomm Make in Africa 2025",
+        "kind": "Program",
+        "org": "Qualcomm",
+        "date": "2025-04",
+        "url": "https://www.connectingafrica.com/skills-and-training/qualcomm-shortlists-startups-for-make-in-africa-2025-program",
+        "logo": "/media/proof/qualcomm.svg"
+      }
+    ],
+    "publications": [
+      {
+        "slug": "patent",
+        "country": "Nigeria",
+        "title": "Full-stack hyperlocal flood prediction engine for data-scarce regions",
+        "date": "2026-01-15",
+        "type": "Patent",
+        "authors": "Umar Fahm"
+      },
+      {
+        "slug": "arb-flash-floods-grid",
+        "country": "Nigeria",
+        "title": "Seasonal flash floods and their impact on Nigeria's national power grid",
+        "venue": "ARB research competition · Top 5",
+        "date": "2025-06-15",
+        "type": "Paper",
+        "authors": "Umar Fahm"
+      }
+    ],
+    "social": [
+      {
+        "slug": "placeholder-linkedin",
+        "platform": "linkedin",
+        "date": "2026-11-03"
+      },
+      {
+        "slug": "placeholder-x",
+        "platform": "x",
+        "date": "2026-11-02"
+      }
+    ],
+    "updates": [
+      {
+        "slug": "2026-11-03-ardis",
+        "country": "Nigeria",
+        "date": "2026-11-03",
+        "tag": "BUILD",
+        "body": "Building Ardis, the next ClimatrixAI product."
+      },
+      {
+        "slug": "2026-11-03-site-live",
+        "country": "Nigeria",
+        "date": "2026-11-03",
+        "tag": "LAUNCH",
+        "links": [
+          {
+            "label": "climatrixai.com",
+            "url": "https://climatrixai.com"
+          }
+        ],
+        "body": "Personal site is live. Track record, proof wall and updates now publish from one content folder."
+      },
+      {
+        "slug": "2026-11-02-drainsentinel",
+        "country": "Nigeria",
+        "date": "2026-11-02",
+        "tag": "BUILD",
+        "body": "DrainSentinel build underway on Axelera edge-AI hardware. Deployment pending."
+      },
+      {
+        "slug": "2026-11-01-research-draft",
+        "country": "Nigeria",
+        "date": "2026-11-01",
+        "tag": "RESEARCH",
+        "body": "First draft of a new research paper complete."
+      },
+      {
+        "slug": "2026-11-01-trained-engineers",
+        "country": "Nigeria",
+        "date": "2026-11-01",
+        "tag": "TEACH",
+        "body": "Trained 5 engineers in agentic AI."
+      },
+      {
+        "slug": "2026-10-09-ngic-london",
+        "country": "United Kingdom",
+        "date": "2026-10-09",
+        "tag": "AWARD",
+        "body": "Received an award at the NEXTGEN Innovation Challenge Grand Finale in London."
+      },
+      {
+        "slug": "2026-09-15-aibo-china",
+        "country": "China",
+        "date": "2026-09-15",
+        "tag": "COURSE",
+        "body": "Took the AIBO course in China."
+      },
+      {
+        "slug": "2026-09-01-digital-impact-pioneer",
+        "country": "China",
+        "date": "2026-09-01",
+        "tag": "AWARD",
+        "body": "Named a Digital Impact Pioneer by the ITC and Youth OPC network, China."
+      },
+      {
+        "slug": "2026-07-01-floodsentinel",
+        "country": "Nigeria",
+        "date": "2026-07-01",
+        "tag": "LAUNCH",
+        "body": "FloodSentinel built: hyperlocal flood prediction for data-scarce regions."
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <radialGradient id="g" cx="70%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#2a3a4a"/>
+      <stop offset="1" stop-color="#111113"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <g stroke="#232327" stroke-width="1">
+    <path d="M0 200H1200M0 400H1200M0 600H1200M300 0V800M600 0V800M900 0V800"/>
+  </g>
+  <text x="600" y="410" fill="#8a8a92" font-family="monospace" font-size="28" text-anchor="middle" letter-spacing="4">[REPLACE] MEDIA</text>
+</svg>

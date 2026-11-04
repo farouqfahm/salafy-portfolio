@@ -1,0 +1,77 @@
+name: Deploy site to AWS
+
+# Rebuilds the static site + Lambda and ships them to the own AWS stack
+# whenever content or code lands on main (and on manual dispatch). CMS edits
+# commit Markdown to content/** via Decap, which triggers this workflow.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "src/**"
+      - "public/**"
+      - "aws/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-aws
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build static export + Lambda bundle
+        run: npm run build:aws
+        env:
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Sync static site (immutable assets)
+        run: |
+          aws s3 sync deploy/site "s3://${{ vars.SITE_BUCKET }}" \
+            --delete \
+            --exclude "*.html" --exclude "*.xml" --exclude "*.json" --exclude "*.yml" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      - name: Sync HTML / feeds (no-cache)
+        run: |
+          aws s3 sync deploy/site "s3://${{ vars.SITE_BUCKET }}" \
+            --exclude "*" \
+            --include "*.html" --include "*.xml" --include "*.json" --include "*.yml" \
+            --cache-control "no-cache"
+
+      - name: Update Lambda code
+        run: |
+          aws lambda update-function-code \
+            --function-name "${{ vars.API_FUNCTION_NAME }}" \
+            --zip-file fileb://deploy/api.zip >/dev/null
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CF_DISTRIBUTION_ID }}" \
+            --paths "/*" >/dev/null
