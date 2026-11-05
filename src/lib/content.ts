@@ -6,6 +6,15 @@ import { resolveCountries } from "./country";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
+/** The admin writes dates unquoted (date: 2026-09-15), which YAML turns into a
+ *  Date object. Turn every Date back into "YYYY-MM-DD" so sorting never breaks. */
+function plainDates(v: any): any {
+  if (v instanceof Date) return isNaN(v.getTime()) ? "" : v.toISOString().slice(0, 10);
+  if (Array.isArray(v)) return v.map(plainDates);
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, plainDates(x)]));
+  return v;
+}
+
 /** Prefix a content-sourced local media path ("/media/...") with the base path.
  *  Image/video ids and external URLs (http, https) are left untouched. */
 function media(src?: string): string {
@@ -120,7 +129,7 @@ function readDir(sub: string): { slug: string; data: any; content: string }[] {
     .map((f) => {
       const raw = fs.readFileSync(path.join(dir, f), "utf8");
       const { data, content } = matter(raw);
-      return { slug: f.replace(/\.mdx?$/, ""), data, content: content.trim() };
+      return { slug: f.replace(/\.mdx?$/, ""), data: plainDates(data), content: content.trim() };
     });
 }
 
