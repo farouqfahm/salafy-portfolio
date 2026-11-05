@@ -135,6 +135,9 @@ async function main() {
   fs.cpSync(OUT, DEPLOY_SITE, { recursive: true });
   console.log(`assembled ${DEPLOY_SITE}`);
 
+  // 4b) Arabic dictionary for every string on the site (cached; Bedrock for new ones).
+  run(`node scripts/build-translations.mjs "${DEPLOY_SITE}"`);
+
   // 5) Rewrite the exported Decap admin config placeholders.
   patchAdminConfig();
 

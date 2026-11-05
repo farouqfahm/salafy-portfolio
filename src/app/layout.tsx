@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import LazyAssistant from "@/components/LazyAssistant";
+import Translator from "@/components/Translator";
+import LangPrompt from "@/components/LangPrompt";
 import { site, SITE_URL } from "@/lib/site";
 import { withBase } from "@/lib/base";
 import { PRE_PAINT_SCRIPT } from "@/lib/i18n";
@@ -49,6 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main">{children}</main>
         <LazyAssistant />
+        <Translator />
+        <LangPrompt />
       </body>
     </html>
   );

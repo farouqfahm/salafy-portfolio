@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T13:49:02.485Z",
+  "generatedAt": "2026-11-05T22:25:01.047Z",
   "profile": {
     "name": "Umar Fahm",
     "alias": "Salafy",
@@ -690,8 +690,17 @@
       {
         "slug": "aibo-china",
         "country": "China",
-        "title": "AIBO course",
+        "title": "Seminar on Successful Business Practices",
+        "org": "Academy for International Business Officials, China",
         "kind": "Course certificate",
+        "date": "2026"
+      },
+      {
+        "slug": "cambridge-carbon-esg",
+        "country": "United Kingdom",
+        "title": "Carbon & ESG Analysis",
+        "org": "University of Cambridge",
+        "kind": "Professional programme",
         "date": "2026"
       },
       {
@@ -701,13 +710,6 @@
         "org": "McKinsey.org",
         "kind": "Professional programme",
         "date": "2025"
-      },
-      {
-        "slug": "cambridge-carbon-esg",
-        "country": "United Kingdom",
-        "title": "Carbon & ESG Analysis",
-        "org": "University of Cambridge",
-        "kind": "Course certificate"
       },
       {
         "slug": "cs197-harvard",
@@ -1257,13 +1259,6 @@
         "body": "Received an award at the NEXTGEN Innovation Challenge Grand Finale in London."
       },
       {
-        "slug": "2026-09-15-aibo-china",
-        "country": "China",
-        "date": "2026-09-15",
-        "tag": "COURSE",
-        "body": "Took the AIBO course in China."
-      },
-      {
         "slug": "2026-09-01-digital-impact-pioneer",
         "country": "China",
         "date": "2026-09-01",
@@ -1276,6 +1271,20 @@
         "date": "2026-07-01",
         "tag": "LAUNCH",
         "body": "FloodSentinel built: hyperlocal flood prediction for data-scarce regions."
+      },
+      {
+        "slug": "2026-09-15-aibo-china",
+        "country": "China",
+        "date": {},
+        "tag": "COURSE",
+        "media": [
+          {
+            "type": "image",
+            "fit": "cover",
+            "src": "/media/img_1066.jpeg"
+          }
+        ],
+        "body": "Seminar on Successful Business Practices in the Silk Road, Academy for International Business Officials, China"
       }
     ]
   }

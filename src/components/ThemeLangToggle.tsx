@@ -1,20 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Lang } from "@/lib/i18n";
-import { withBase } from "@/lib/base";
+import { setLang as setGlobalLang } from "./Translator";
 
 type Theme = "dark" | "light";
 
 function readAttr(name: string): string {
   if (typeof document === "undefined") return "";
   return document.documentElement.getAttribute(name) || "";
-}
-
-function applyLang(lang: Lang) {
-  const d = document.documentElement;
-  d.setAttribute("data-lang", lang);
-  d.setAttribute("lang", lang);
-  d.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 }
 
 function applyTheme(theme: Theme) {
@@ -33,27 +26,9 @@ export default function ThemeLangToggle() {
     setLang((readAttr("data-lang") as Lang) || "en");
     setReady(true);
 
-    // First-visit auto-detect: only when the user has not chosen a language yet.
-    if (!localStorage.getItem("lang")) {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 1500);
-      fetch(withBase("/api/geo"), { signal: ctrl.signal })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => {
-          clearTimeout(timer);
-          if (j && j.arab && !localStorage.getItem("lang")) {
-            applyLang("ar");
-            setLang("ar");
-          }
-        })
-        .catch(() => {
-          /* timezone/navigator fallback already ran in the pre-paint script */
-        });
-      return () => {
-        clearTimeout(timer);
-        ctrl.abort();
-      };
-    }
+    const onLang = (e: Event) => setLang((e as CustomEvent).detail as Lang);
+    window.addEventListener("langchange", onLang);
+    return () => window.removeEventListener("langchange", onLang);
   }, []);
 
   const toggleTheme = () => {
@@ -64,12 +39,11 @@ export default function ThemeLangToggle() {
   };
   const setLanguage = (next: Lang) => {
     setLang(next);
-    applyLang(next);
-    localStorage.setItem("lang", next);
+    setGlobalLang(next);
   };
 
   return (
-    <div className="flex items-center gap-1.5" suppressHydrationWarning>
+    <div className="flex items-center gap-1.5" suppressHydrationWarning data-no-translate="">
       <button
         type="button"
         onClick={toggleTheme}

@@ -38,12 +38,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Build static export + Lambda bundle
-        run: npm run build:aws
-        env:
-          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
-          GITHUB_REPO: ${{ github.repository }}
-
       - name: Check deploy settings
         run: |
           echo "role=[${{ vars.AWS_DEPLOY_ROLE_ARN }}] region=[${{ vars.AWS_REGION }}] bucket=[${{ vars.SITE_BUCKET }}]"
@@ -57,6 +51,12 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Build static export + Lambda bundle
+        run: npm run build:aws
+        env:
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+          GITHUB_REPO: ${{ github.repository }}
 
       - name: Sync static site (immutable assets)
         run: |

@@ -520,6 +520,14 @@ Resources:
                 Effect: Allow
                 Action: lambda:UpdateFunctionCode
                 Resource: !GetAtt ApiFunction.Arn
+              - Sid: TranslateWithClaude
+                Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:Converse
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:bedrock:*::foundation-model/anthropic.*"
+                  - !Sub "arn:${AWS::Partition}:bedrock:*:${AWS::AccountId}:inference-profile/*anthropic.*"
 
 Outputs:
   SiteUrl:

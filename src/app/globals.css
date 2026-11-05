@@ -184,3 +184,11 @@ html[dir="rtl"] .prose-post blockquote { border-left: 0; border-right: 2px solid
 @media (prefers-reduced-motion: reduce) {
   .showcase-pan, .showcase-ping, .showcase-scan, .showcase-caption { animation: none !important; }
 }
+
+/* Arabic is swapped in after load: hide text until then (max 2.5 s, see i18n.ts) */
+html[data-lang="ar"]:not([data-i18n="ready"]) body > header,
+html[data-lang="ar"]:not([data-i18n="ready"]) #main { visibility: hidden; }
+
+/* Arabic letters join; spaced-out (tracked) text breaks them */
+html[data-lang="ar"] body * { letter-spacing: 0 !important; }
+html[data-lang="ar"] .uppercase { text-transform: none; }

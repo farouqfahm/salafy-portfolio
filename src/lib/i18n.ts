@@ -132,18 +132,11 @@ export const PRE_PAINT_SCRIPT = `
   var th=localStorage.getItem('theme');
   if(!th){th=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
   d.setAttribute('data-theme',th);
-  // Language: saved choice wins; else leave 'en' and let the client detector run.
+  // Language: the visitor's own choice (asked on first visit), else English.
   var lg=localStorage.getItem('lang');
-  if(lg==='ar'||lg==='en'){d.setAttribute('data-lang',lg);d.setAttribute('lang',lg);d.setAttribute('dir',lg==='ar'?'rtl':'ltr');}
-  else{
-    // Fast timezone hint so Arab-region visitors see Arabic without a flash.
-    try{
-      var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'');
-      var arTz=['Asia/Riyadh','Asia/Dubai','Asia/Qatar','Asia/Kuwait','Asia/Bahrain','Asia/Muscat','Asia/Baghdad','Asia/Amman','Asia/Beirut','Asia/Damascus','Asia/Gaza','Asia/Hebron','Asia/Aden','Africa/Cairo','Africa/Tripoli','Africa/Tunis','Africa/Algiers','Africa/Casablanca','Africa/Khartoum','Africa/Nouakchott','Africa/Mogadishu','Africa/Djibouti','Indian/Comoro'];
-      var arLang=(navigator.language||'').toLowerCase().indexOf('ar')===0;
-      if(arTz.indexOf(tz)>=0||arLang){d.setAttribute('data-lang','ar');d.setAttribute('lang','ar');d.setAttribute('dir','rtl');}
-      else{d.setAttribute('data-lang','en');d.setAttribute('lang','en');d.setAttribute('dir','ltr');}
-    }catch(e){d.setAttribute('data-lang','en');}
-  }
+  if(lg!=='ar'){lg='en';}
+  d.setAttribute('data-lang',lg);d.setAttribute('lang',lg);d.setAttribute('dir',lg==='ar'?'rtl':'ltr');
+  // Arabic text is swapped in after load; never keep the page hidden for long.
+  if(lg==='ar'){setTimeout(function(){d.setAttribute('data-i18n','ready');},2500);}else{d.setAttribute('data-i18n','ready');}
 }catch(e){}})();
 `;
