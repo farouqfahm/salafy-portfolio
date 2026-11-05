@@ -489,7 +489,14 @@ Resources:
               StringEquals:
                 "token.actions.githubusercontent.com:aud": sts.amazonaws.com
               StringLike:
-                "token.actions.githubusercontent.com:sub": !Sub "repo:${GitHubRepo}:*"
+                # GitHub may send "repo:owner/name:..." or the newer
+                # "repo:owner@<id>/name@<id>:..." form. Accept both for this repo only.
+                "token.actions.githubusercontent.com:sub":
+                  - !Sub "repo:${GitHubRepo}:*"
+                  - !Sub
+                    - "repo:${Owner}@*/${Name}@*:*"
+                    - Owner: !Select [0, !Split ["/", !Ref GitHubRepo]]
+                      Name: !Select [1, !Split ["/", !Ref GitHubRepo]]
       Policies:
         - PolicyName: deploy
           PolicyDocument:
