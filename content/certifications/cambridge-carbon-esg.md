@@ -1,8 +1,8 @@
 ---
-country: "United Kingdom"
-title: "Carbon & ESG Analysis"
-org: "University of Cambridge"
-kind: "Course certificate"
-date: "[REPLACE] Year"
-url: ""   # [REPLACE] certificate link
+country: United Kingdom
+title: Carbon & ESG Analysis
+org: University of Cambridge
+kind: Professional programme
+date: "2026"
+url: ""
 ---
